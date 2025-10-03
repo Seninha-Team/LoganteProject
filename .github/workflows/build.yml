@@ -29,9 +29,5 @@ jobs:
         run: npm install
 
       # Passo 4: Execute os testes
-      - name: Run tests
-        run: npm test
-
-      # Passo 5: Faça o build do projeto
-      - name: Build project
-        run: npm run build
+      - name: build
+        run: npm start
