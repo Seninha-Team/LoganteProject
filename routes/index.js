@@ -17,6 +17,14 @@ router.post('/login', function(req, res) {
   
 });
 
+router.get('/login', async (req, res, next) => {
+  res.render('loginPage');
+})
+
+router.get("/registro", (req, res) => {
+    res.render("registro");
+})
+
 router.post('/register', async (req, res) => {
   const {username, password} = req.body;
   if(username == null || username === ''){
