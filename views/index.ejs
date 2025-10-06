@@ -1,11 +1,108 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - <%= title %></title>
+  <style>
+    /* Reset básico */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .container:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      border-color: #6a11cb;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background: #6a11cb;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #2575fc;
+    }
+
+    .erro {
+      color: #e74c3c;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    p a {
+      color: #6a11cb;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    p a:hover {
+      color: #2575fc;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+
+    <% if (erro) { %>
+      <p class="erro"><%= erro %></p>
+    <% } %>
+
+    <form method="POST" action="/">
+      <input type="email" name="email" placeholder="Digite seu email" required>
+      <input type="password" name="senha" placeholder="Digite sua senha" required>
+      <button type="submit">Entrar</button>
+    </form>
+
+    <p style="margin-top: 20px;">
+      <a href="/registro">Cadastre-se</a>
+    </p>
+  </div>
+</body>
 </html>
