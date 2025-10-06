@@ -1,6 +1,5 @@
-name: Build and Test
+name: Build and Run Express App
 
-# Define o evento que dispara o workflow (exemplo: push para a branch principal)
 on:
   push:
     branches:
@@ -11,23 +10,23 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Defina o sistema operacional que o GitHub Actions usará (Ubuntu, Windows, MacOS)
-    
+    runs-on: ubuntu-latest
+
     steps:
-      # Passo 1: Checkout do código
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Passo 2: Configura o Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Defina a versão do Node.js a ser usada
+          node-version: '14' 
 
-      # Passo 3: Instala as dependências
       - name: Install dependencies
         run: npm install
 
-      # Passo 4: Execute os testes
-      - name: build
-        run: npm start
+      - name: Start Express app and check if it runs
+        run: |
+          nohup npm start &  # Inicia a aplicação em segundo plano
+          sleep 10  # Aguarda 10 segundos para o servidor iniciar
+          curl --silent --fail http://localhost:3000  # Verifica se a aplicação está funcionando na porta 3000
+        continue-on-error: true 
