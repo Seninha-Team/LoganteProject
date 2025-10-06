@@ -15,7 +15,7 @@ router.post('/login', function(req, res) {
   if(usuario.password !== password) res.status(400).send("Senha incorreta");
   res.status(200).send('Login Concluído');
   
-});
+
 
 router.get('/login', async (req, res, next) => {
   res.render('loginPage');
@@ -25,7 +25,7 @@ router.get("/registro", (req, res) => {
     res.render("registro");
 })
 
-router.post('/register', async (req, res) => {
+router.post('/registro', async (req, res) => {
   const {username, password} = req.body;
   if(username == null || username === ''){
     res.status(500).send("Usuário Inválido para registro")
