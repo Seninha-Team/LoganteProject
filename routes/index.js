@@ -8,17 +8,37 @@ router.get('/', function(req, res, next) {
 });
 
 /* POST login */
-router.post('/', function(req, res) {
-  const { email, senha } = req.body;
-
-  // teste simples de login
-  if (email === 'admin@teste.com' && senha === '1234') {
-    res.send('Login bem-sucedido!'); // ou redireciona para /dashboard
-  } else {
-    // envia a variável 'erro' com a mensagem
-    res.render('index', { title: 'Express', erro: 'Usuário ou senha inválidos!' });
-  }
+router.post('/login', function(req, res) {
+  const { username, password } = req.body;
+  if(!username || username ==='' || !password || password ==='') res.status(400).send("Todos os campos devem ser preenchidos");
+  const usuario = global.usuarios.find(p => p.username === username);
+  if(usuario.password !== password) res.status(400).send("Senha incorreta");
+  res.status(200).send('Login Concluído');
+  
 });
+
+router.get('/login', async (req, res, next) => {
+  res.render('loginPage');
+})
+
+router.get("/registro", (req, res) => {
+    res.render("registro");
+})
+
+router.post('/register', async (req, res) => {
+  const {username, password} = req.body;
+  if(username == null || username === ''){
+    res.status(500).send("Usuário Inválido para registro")
+  }
+  if(password == null || password === ''){
+    res.status(500).send("A senha deve conter pelo menos um caractere")
+  }
+
+  global.usuarios.push({username, password});
+  res.redirect('/login')
+
+
+})
 
 /* GET registro */
 router.get('/registro', function(req, res) {
